@@ -1,43 +1,67 @@
 # Beyond the Garden Gate
 
-FIT3179 Data Visualisation 2 · Topic 7 · Australian botanical gardens
+**FIT3179 Data Visualisation 2 — Topic 7: Australian Botanical Gardens**
 
-- **Published website:** https://kailiangggggg.github.io/fit3179-dv2-submission/
-- **Repository:** https://github.com/kailiangggggg/fit3179-dv2-submission
+[View Interactive Visualisation](https://kailiangggggg.github.io/fit3179-dv2-submission/)
 
-This is an independent release snapshot of the production site at source commit `b0c46dbf54fc015054f9953f832f16ad7ca3f781`, taken from [the original repository](https://github.com/kailiangggggg/fit3179-dv2-botanical-gardens). It is not a copy of the original development history; that repository remains intact. The page retains the author and snapshot date in its footer.
+## Project Overview
 
-## Run and validate
+Beyond the Garden Gate is an interactive data visualisation exploring botanical gardens, plant collections, and wild seed origins across Australia.
 
-Use Node.js 22 and pnpm 11.25.0.
+The visualisation examines the distribution of registered botanical gardens and arboreta, the composition of selected botanical collection records, and the geographical origins of seed accessions. It also considers how these collections relate to botanical research, biodiversity conservation, and education.
 
-```powershell
+The story highlights limitations in the available data, including incomplete geographic coordinates and collection dates.
+
+## Visualisation
+
+The website presents **13 visualisation groups** across four chapters:
+
+1. **A National Footprint** — Distribution, population-adjusted comparisons, rankings, and registered facility sizes.
+2. **Inside the Collections** — Living specimens, preserved herbarium records, and botanical collection composition.
+3. **Beyond the Garden Gate** — Wild seed origins, accession records, and geographical and temporal data coverage.
+4. **What the Evidence Means** — Key findings, conservation and education context, and limitations.
+
+The visualisations are implemented using Vega-Lite, including three different map techniques and interactive filtering.
+
+## Data Sources
+
+The project uses publicly available data from:
+
+- Geoscience Australia
+- Australian Bureau of Statistics (ABS)
+- Global Biodiversity Information Facility (GBIF)
+- Atlas of Living Australia (ALA)
+
+Information about data processing, source attribution, licences, and limitations is available in [Sources and Methods](docs/sources-and-methods.md).
+
+## Technologies
+
+- HTML, CSS and JavaScript
+- Vega-Lite and Vega-Embed
+- Vite
+- Python for data preparation
+
+## Running Locally
+
+Requires Node.js 22 and pnpm.
+
+```bash
 pnpm install --frozen-lockfile
 pnpm run dev
+```
+
+To validate the visualisation specifications and build the website:
+
+```bash
 pnpm run validate:specs
 pnpm run test:site
 pnpm run build
-pnpm run preview
 ```
 
-The production build is written to `site-dist/`. GitHub Actions builds and deploys that directory to GitHub Pages when `main` is updated.
+The Vega-Lite specifications are located in `public/specs/`, and the processed datasets are available in `public/data/`.
 
-## Charts, data and sources
+## Project Information
 
-The site contains 13 chart groups, three distinct map idioms, and human-readable Vega-Lite v5 specifications in `public/specs/`. The processed data required by the charts is in `public/data/` (about 1.2 MB). Charts use local specifications and data rather than a third-party runtime data API.
+Developed for FIT3179 Data Visualisation 2, Monash University Malaysia.
 
-Sources, licences, filters, limitations and data-preparation methods are documented in [`docs/sources-and-methods.md`](docs/sources-and-methods.md). Font licence texts are included under [`licenses/fonts/`](licenses/fonts/).
-
-Raw source archives are not included in this public snapshot. For local reproduction, acquire the allowlisted inputs into a sibling `data/raw` directory, then verify and prepare them:
-
-```powershell
-python -m pip install -r requirements.txt
-python -m scripts.fetch_sources --raw-root ..\data\raw
-python -m scripts.fetch_sources --verify-only --raw-root ..\data\raw
-python -m scripts.prepare_data --raw-root ..\data\raw --output-dir public\data
-pnpm run test:data
-```
-
-The committed chart-ready files reflect the 14 October 2026 source snapshot. New upstream archives may differ; compare input hashes with `public/data/source_provenance.json` before replacing committed results. The fetch script preserves existing snapshots rather than overwriting them.
-
-This repository packages the website release only. The hand-drawn Topic 7 sketch PDF and Moodle submission are separate student-owned materials and are not included here.
+The original development repository and history are retained in the [project repository](https://github.com/kailiangggggg/fit3179-dv2-botanical-gardens).
